@@ -22,7 +22,7 @@ namespace PotterShoppingCart
         {
             var Fee = 0;
             var GroupList = OrderList
-                .Select((b, i) => new { index = i, value = b.Name, cost = b.Cost })
+                .Select((b, i) => new { index = i, value = b.Series, cost = b.Cost })
                 .GroupBy(grp => grp.value)
                 .Select(grp => new
                 {

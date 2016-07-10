@@ -20,7 +20,7 @@ namespace PotterShoppingCart.Tests
             var expected = 100;
             var target = new PotterShop();
             Books = new List<Book> {
-                new Book {Name = "Series01" }
+                new Book {Series = 1 }
             };
 
             //act
@@ -36,8 +36,8 @@ namespace PotterShoppingCart.Tests
             var expected = 190;
             var target = new PotterShop();
             Books = new List<Book> {
-                new Book {Name = "Series01" },
-                new Book {Name = "Series02" }
+                new Book {Series = 1 },
+                new Book {Series = 2 }
             };
 
             //act
@@ -54,9 +54,9 @@ namespace PotterShoppingCart.Tests
             var expected = 270;
             var target = new PotterShop();
             Books = new List<Book> {
-                new Book {Name = "Series01" },
-                new Book {Name = "Series02" },
-                new Book {Name = "Series03" }
+                new Book {Series = 1 },
+                new Book {Series = 2 },
+                new Book {Series = 3 }
             };
 
             //act

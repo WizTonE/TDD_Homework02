@@ -7,7 +7,7 @@ namespace PotterShoppingCart
 {
     public class Book
     {
-        public string Name { get; set; }
+        public int Series { get; set; }
         public int Cost { get; set; }
         public Book()
         {
