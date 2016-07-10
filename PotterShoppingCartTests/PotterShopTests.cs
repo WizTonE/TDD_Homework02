@@ -108,13 +108,34 @@ namespace PotterShoppingCart.Tests
         }
 
         [TestMethod()]
-        public void Buy_One_Book_for_Series1_and_2_and_2books_of_3_expected_Fee_is_370()
+        public void Buy_One_Book_for_Series1_and_2_and_2books_of_Series3_expected_Fee_is_370()
         {
             //arrange
             var expected = 370;
             var target = new PotterShop();
             Books = new List<Book> {
                 new Book {Series = 1 },
+                new Book {Series = 2 },
+                new Book {Series = 3 },
+                new Book {Series = 3 }
+            };
+
+            //act
+            var actual = target.CalculateFee(Books);
+
+            //assert
+            expected.ToExpectedObject().ShouldEqual(actual);
+        }
+
+        [TestMethod()]
+        public void Buy_One_Book_for_Series1_and_2books_of_Series2_and_2books_of_Series3_expected_Fee_is_460()
+        {
+            //arrange
+            var expected = 460;
+            var target = new PotterShop();
+            Books = new List<Book> {
+                new Book {Series = 1 },
+                new Book {Series = 2 },
                 new Book {Series = 2 },
                 new Book {Series = 3 },
                 new Book {Series = 3 }

@@ -7,7 +7,7 @@ namespace PotterShoppingCart
 {
     public class PotterShop
     {
-        internal Dictionary<int, double> DiscountList = new Dictionary<int, double>
+        private Dictionary<int, double> DiscountList = new Dictionary<int, double>//同系列每本一本時的書本數量與折扣
         {
             {0,0 },
             {1,1 },
@@ -17,25 +17,19 @@ namespace PotterShoppingCart
             {5,0.75 }
         };
         
-
         public int CalculateFee(List<Book> OrderList)
         {
             var Fee = 0;
-            var GroupList = OrderList
-                .Select((b, i) => new { index = i, value = b.Series, cost = b.Cost })
-                .GroupBy(grp => grp.value)
-                .Select(grp => new
-                {
-                    Name = grp.Select(v => v.value).FirstOrDefault(),
-                    Count = grp.Select(i => i.index).Count(),
-                    Cost = grp.Select(i => i.cost).FirstOrDefault()
-                }).ToList();
+            var DuplicateList = OrderList.GroupBy(grp => grp.Series).SelectMany(x => x.Skip(1)).ToList();//取得重複的書集合
+            if (DuplicateList.Count() > 0)//如果尚有重複的書, 則再次取得重複的書集合
+            {
+                Fee += CalculateFee(DuplicateList);
+            }
 
-            GroupList.ForEach(x => { Fee = (int)(x.Cost * DiscountList[x.Count > 1 ? x.Count - 1 : 0]); });
-
-            Fee += (int)(GroupList.Count() * 100 * DiscountList[GroupList.Count]);
-
+            var SeriesGroupList = OrderList.GroupBy(grp => grp.Series).SelectMany(x => x.Take(1)).ToList();//取得系列中每本一本的書集合
+            Fee += (int)(SeriesGroupList.Count() * SeriesGroupList.FirstOrDefault().Cost * DiscountList[SeriesGroupList.Count()]);//計算同系列每本一本時的價錢
             return Fee;
         }
+
     }
 }
