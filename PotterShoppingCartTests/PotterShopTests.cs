@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using ExpectedObjects;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PotterShoppingCart;
 using System;
 using System.Collections.Generic;
@@ -10,25 +11,25 @@ namespace PotterShoppingCart.Tests
     [TestClass()]
     public class PotterShopTests
     {
-        private List<Book> Bootlist { get; set; }
+        private List<Book> Books { get; set; }
 
         [TestMethod()]
-        public void CalculateFeeTest()
+        public void Buy_One_Book_for_Series01_expected_Fee_is_100()
         {
             //arrange
+            var expected = 100;
             var target = new PotterShop();
+            Books = new List<Book> {
+                new Book {Name = "Series01" }
+            };
 
             //act
-            var actual = target.CalculateFee<Book>(Bootlist);
+            var actual = target.CalculateFee(Books);
 
             //assert
-            Assert.Fail();
+            expected.ToExpectedObject().ShouldEqual(actual);
         }
     }
 
-    public class Book
-    {
-        public string Name { get; set; }
-        public int Cost { get; set; }
-    }
+    
 }
