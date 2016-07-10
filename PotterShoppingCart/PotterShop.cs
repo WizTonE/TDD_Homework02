@@ -21,8 +21,20 @@ namespace PotterShoppingCart
         public int CalculateFee(List<Book> OrderList)
         {
             var Fee = 0;
+            var GroupList = OrderList
+                .Select((b, i) => new { index = i, value = b.Name, cost = b.Cost })
+                .GroupBy(grp => grp.value)
+                .Select(grp => new
+                {
+                    Name = grp.Select(v => v.value).FirstOrDefault(),
+                    Count = grp.Select(i => i.index).Count(),
+                    Cost = grp.Select(i => i.cost).FirstOrDefault()
+                }).ToList();
 
-            
+            GroupList.ForEach(x => { Fee = (int)(x.Cost * DiscountList[x.Count > 1 ? x.Count - 1 : 0]); });
+
+            Fee += (int)(GroupList.Count() * 100 * DiscountList[GroupList.Count]);
+
             return Fee;
         }
     }
