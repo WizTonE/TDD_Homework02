@@ -14,7 +14,7 @@ namespace PotterShoppingCart.Tests
         private List<Book> Books { get; set; }
 
         [TestMethod()]
-        public void Buy_One_Book_for_Series01_expected_Fee_is_100()
+        public void Buy_One_Book_for_Series1_expected_Fee_is_100()
         {
             //arrange
             var expected = 100;
@@ -30,7 +30,7 @@ namespace PotterShoppingCart.Tests
             expected.ToExpectedObject().ShouldEqual(actual);
         }
         [TestMethod()]
-        public void Buy_One_Book_for_Series01_and_Series02_expected_Fee_is_190()
+        public void Buy_One_Book_for_Series1_and_2_expected_Fee_is_190()
         {
             //arrange
             var expected = 190;
@@ -48,7 +48,7 @@ namespace PotterShoppingCart.Tests
         }
 
         [TestMethod()]
-        public void Buy_One_Book_for_Series01_and_Series02_and_Series03_expected_Fee_is_270()
+        public void Buy_One_Book_for_Series1_and_2_and_3_expected_Fee_is_270()
         {
             //arrange
             var expected = 270;
@@ -57,6 +57,26 @@ namespace PotterShoppingCart.Tests
                 new Book {Series = 1 },
                 new Book {Series = 2 },
                 new Book {Series = 3 }
+            };
+
+            //act
+            var actual = target.CalculateFee(Books);
+
+            //assert
+            expected.ToExpectedObject().ShouldEqual(actual);
+        }
+
+        [TestMethod()]
+        public void Buy_One_Book_for_Series1_and_2_and_3_and_4_expected_Fee_is_320()
+        {
+            //arrange
+            var expected = 320;
+            var target = new PotterShop();
+            Books = new List<Book> {
+                new Book {Series = 1 },
+                new Book {Series = 2 },
+                new Book {Series = 3 },
+                new Book {Series = 4 }
             };
 
             //act
