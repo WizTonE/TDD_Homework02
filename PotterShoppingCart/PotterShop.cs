@@ -7,10 +7,9 @@ namespace PotterShoppingCart
 {
     public class PotterShop
     {
-        public int CalculateFee<T>(IEnumerable<T> OrderList)
+        public object CalculateFee<T>(List<T> bootlist)
         {
-            var Fee = 0;
-            return Fee;
+            throw new NotImplementedException();
         }
     }
 }
