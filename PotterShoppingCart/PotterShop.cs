@@ -7,9 +7,9 @@ namespace PotterShoppingCart
 {
     public class PotterShop
     {
-        public object CalculateFee<T>(List<T> bootlist)
+        public int CalculateFee<T>(List<T> books)
         {
-            throw new NotImplementedException();
+            return 100 * books.Count;
         }
     }
 }
