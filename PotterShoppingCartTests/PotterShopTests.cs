@@ -133,6 +133,28 @@ namespace PotterShoppingCart.Tests
             //assert
             expected.ToExpectedObject().ShouldEqual(actual);
         }
+
+        [TestMethod()]
+        public void Buy_Series1_Series2_Series2_Series3_Series3_and_expected_fee_is_460()
+        {
+            //arrange
+            var expected = 460;
+            var target = new PotterShop();
+            Books = new List<Book>
+            {
+                new Book {Series = 1 },
+                new Book {Series = 2 },
+                new Book {Series = 2 },
+                new Book {Series = 3 },
+                new Book {Series = 3 }
+            };
+
+            //act
+            var actual = target.CalculateFee(Books);
+
+            //assert
+            expected.ToExpectedObject().ShouldEqual(actual);
+        }
     }
 
     
