@@ -19,6 +19,8 @@ namespace PotterShoppingCart
                     return (int)(100 * books.Count * 0.9);
                 case "4":
                     return (int)(100 * books.Count * 0.8);
+                case "5":
+                    return (int)(100 * books.Count * 0.75);
                 default:
                     return 0;
             }
