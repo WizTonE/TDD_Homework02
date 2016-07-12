@@ -19,7 +19,10 @@ namespace PotterShoppingCart
 
         public int CalculateFee(List<Book> books)
         {
-            return (int)(100 * books.Count * discountList[books.Count]);
+            var distinctBooks = books.GroupBy(x => x.Series).SelectMany(x => x.Take(1)).ToList();
+            var duplicateBooks = books.GroupBy(x => x.Series).SelectMany(x => x.Skip(1)).ToList();
+            return (int)(100 * distinctBooks.Count * discountList[distinctBooks.Count]) 
+                + duplicateBooks.Count * 100;
         }
     }
 }
