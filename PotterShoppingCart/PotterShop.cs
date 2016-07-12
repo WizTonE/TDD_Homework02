@@ -16,6 +16,7 @@ namespace PotterShoppingCart
             {4,0.8 },
             {5,0.75 }
         };
+
         
         public int CalculateFee(List<Book> OrderList)
         {
