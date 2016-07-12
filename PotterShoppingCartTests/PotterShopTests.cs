@@ -14,7 +14,7 @@ namespace PotterShoppingCart.Tests
         private List<Book> Books { get; set; }
 
         [TestMethod()]
-        public void CalculateFeeTest()
+        public void Buy_Series1_and_expected_fee_is_100()
         {
             //arrange
             var expected = 100;
@@ -25,17 +25,31 @@ namespace PotterShoppingCart.Tests
             };
 
             //act
-            var actual = target.CalculateFee<Book>(Books);
+            var actual = target.CalculateFee(Books);
+
+            //assert
+            expected.ToExpectedObject().ShouldEqual(actual);
+        }
+
+        [TestMethod()]
+        public void Buy_Series1_Series2_and_expected_fee_is_190()
+        {
+            //arrange
+            var expected = 100;
+            var target = new PotterShop();
+            Books = new List<Book>
+            {
+                new Book {Series = 1 },
+                new Book {Series = 2 }
+            };
+
+            //act
+            var actual = target.CalculateFee(Books);
 
             //assert
             expected.ToExpectedObject().ShouldEqual(actual);
         }
     }
 
-    public class Book
-    {
-        public int Series { get; set; }
-        public int Cost { get; set; }
-        public Book() { Cost = 100; }
-    }
+    
 }

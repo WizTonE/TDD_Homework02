@@ -7,9 +7,18 @@ namespace PotterShoppingCart
 {
     public class PotterShop
     {
-        public int CalculateFee<T>(List<T> books)
+        public int CalculateFee(List<Book> books)
         {
-            return 100 * books.Count;
+            switch (books.Count.ToString())
+            {
+                case "1":
+                    return 100 * books.Count;
+                case "2":
+                    return 100 * (int)(books.Count*0.95);
+                default:
+                    return 0;
+            }
+            
         }
     }
 }
