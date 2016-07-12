@@ -7,24 +7,19 @@ namespace PotterShoppingCart
 {
     public class PotterShop
     {
+        internal Dictionary<int, double> discountList = new Dictionary<int, double>
+        {
+            {0,0 },
+            {1,1 },
+            {2,0.95 },
+            {3,0.9 },
+            {4,0.8 },
+            {5,0.75 }
+        };
+
         public int CalculateFee(List<Book> books)
         {
-            switch (books.Count.ToString())
-            {
-                case "1":
-                    return 100 * books.Count;
-                case "2":
-                    return (int)(100 * books.Count * 0.95);
-                case "3":
-                    return (int)(100 * books.Count * 0.9);
-                case "4":
-                    return (int)(100 * books.Count * 0.8);
-                case "5":
-                    return (int)(100 * books.Count * 0.75);
-                default:
-                    return 0;
-            }
-            
+            return (int)(100 * books.Count * discountList[books.Count]);
         }
     }
 }
